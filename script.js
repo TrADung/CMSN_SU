@@ -211,5 +211,11 @@ function checkOrientation() {
   }
 }
 window.addEventListener('resize', checkOrientation);
-window.addEventListener('orientationchange', checkOrientation);
+window.addEventListener('orientationchange', () => {
+  checkOrientation();
+  // Nếu vừa chuyển sang ngang trên thiết bị di động thì reload lại trang
+  if (window.innerWidth > window.innerHeight && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    location.reload();
+  }
+});
 window.addEventListener('DOMContentLoaded', checkOrientation);
