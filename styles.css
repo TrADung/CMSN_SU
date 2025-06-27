@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.matrix {
+  position: absolute;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.matrix span {
+  display: block;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+.countdown, .message {
+  position: absolute;
+  color: white;
+  font-size: 100px;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 1s, transform 1s;
+}
+
+.morph {
+  animation: morph 2s infinite;
+}
+
+@keyframes morph {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.5); letter-spacing: 10px; }
+  100% { opacity: 0; transform: scale(0); }
+}
