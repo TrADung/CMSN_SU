@@ -57,15 +57,22 @@ function morphText(targetText, duration = 2200, hold = 1800) {
     // Responsive: giảm font chữ khi trên màn hình nhỏ (điện thoại)
     let fontSize = 120;
     let step = 3;
-    if (window.innerWidth < 700) {
-      fontSize = Math.floor(window.innerWidth / 10); // chữ vừa với màn hình ngang
-      step = 2; // tăng mật độ điểm cho chữ nhỏ
+    let minDim = Math.min(window.innerWidth, window.innerHeight);
+    if (minDim < 700) {
+      fontSize = Math.floor(minDim / 8); // chữ vừa với cả chiều ngang và dọc
+      step = 2;
     }
     offCtx.font = `bold ${fontSize}px monospace`;
     offCtx.textAlign = 'center';
     offCtx.textBaseline = 'middle';
     offCtx.fillStyle = '#fff';
-    offCtx.fillText(targetText, off.width / 2, off.height / 2);
+    // Hỗ trợ xuống dòng bằng ký tự '\' hoặc '\n' trong targetText
+    const lines = targetText.split(/\\n|\\/);
+    const lineHeight = fontSize * 1.1;
+    const totalHeight = lines.length * lineHeight;
+    for (let i = 0; i < lines.length; i++) {
+      offCtx.fillText(lines[i], off.width / 2, off.height / 2 - totalHeight / 2 + i * lineHeight + lineHeight / 2);
+    }
     const imgData = offCtx.getImageData(0, 0, off.width, off.height);
     // Giảm bước lặp để tăng mật độ điểm (lấp đầy chữ)
     for (let y = 0; y < imgData.height; y += step) {
@@ -160,9 +167,9 @@ async function startSequence() {
   await morphText('3');
   await morphText('2');
   await morphText('1');
-  await morphText('Happy Birthday');
+  await morphText('Happy\\Birthday');
   await morphText('28.07.2006');
-  await morphText('Hồ Thị Bảo Ngọc');
+  await morphText('Hồ Thị\\Bảo Ngọc');
 }
 
 startSequence();
