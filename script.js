@@ -54,15 +54,22 @@ function morphText(targetText, duration = 2200, hold = 1800) {
     off.height = canvas.height;
     const offCtx = off.getContext('2d');
     offCtx.clearRect(0, 0, off.width, off.height);
-    offCtx.font = 'bold 120px monospace'; // tăng font size
+    // Responsive: giảm font chữ khi trên màn hình nhỏ (điện thoại)
+    let fontSize = 120;
+    let step = 3;
+    if (window.innerWidth < 700) {
+      fontSize = Math.floor(window.innerWidth / 10); // chữ vừa với màn hình ngang
+      step = 2; // tăng mật độ điểm cho chữ nhỏ
+    }
+    offCtx.font = `bold ${fontSize}px monospace`;
     offCtx.textAlign = 'center';
     offCtx.textBaseline = 'middle';
     offCtx.fillStyle = '#fff';
     offCtx.fillText(targetText, off.width / 2, off.height / 2);
     const imgData = offCtx.getImageData(0, 0, off.width, off.height);
     // Giảm bước lặp để tăng mật độ điểm (lấp đầy chữ)
-    for (let y = 0; y < imgData.height; y += 3) {
-      for (let x = 0; x < imgData.width; x += 3) {
+    for (let y = 0; y < imgData.height; y += step) {
+      for (let x = 0; x < imgData.width; x += step) {
         const idx = (y * imgData.width + x) * 4;
         if (imgData.data[idx + 3] > 128) {
           points.push({ x, y });
