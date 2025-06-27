@@ -194,7 +194,7 @@ function showRotateHint() {
     hint.style.color = '#fff';
     hint.style.fontSize = '2rem';
     hint.style.textAlign = 'center';
-    hint.innerHTML = '<div style="font-size:3rem;">🔄</div>Vui lòng xoay ngang điện thoại để trải nghiệm tốt nhất!';
+    hint.innerHTML = '<div style="font-size:3rem;">🔄</div>Vui lòng xoay ngang điện thoại và reload trang để trải nghiệm tốt nhất!';
     document.body.appendChild(hint);
   }
   hint.style.display = 'flex';
@@ -212,10 +212,12 @@ function checkOrientation() {
 }
 window.addEventListener('resize', checkOrientation);
 window.addEventListener('orientationchange', () => {
+  // Chỉ reload nếu thực sự chuyển từ dọc sang ngang
+  setTimeout(() => {
+    if (window.innerWidth > window.innerHeight && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+      location.reload();
+    }
+  }, 400); // delay để trình duyệt cập nhật lại kích thước thực tế
   checkOrientation();
-  // Nếu vừa chuyển sang ngang trên thiết bị di động thì reload lại trang
-  if (window.innerWidth > window.innerHeight && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
-    location.reload();
-  }
 });
 window.addEventListener('DOMContentLoaded', checkOrientation);
