@@ -169,14 +169,18 @@ window.startSequence = async function() {
   await morphText('2');
   await morphText('1');
   await morphText('Happy\\Birthday');
-  await morphText('28.07.2006');
-  await morphText('Hồ Thị\\Bảo Ngọc');
-  await morphText('Chúc BNgoc\\tất cả');
-  await morphText('Chúc BNgoc\\tất cả');
-  await morphText('Chúc BNgoc\\tất cả');
-  await morphText('Chúc BNgoc\\tất cả');
-  await morphText('Chúc BNgoc\\tất cả');
-  await morphText('Chúc BNgoc\\tất cả');
+  await morphText('09.07.2006');
+  await morphText('Bé SU');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
+  await morphText('Chúc Bé Su\\tất cả');
 }
 
 // Responsive: Hướng dẫn xoay ngang trên điện thoại
